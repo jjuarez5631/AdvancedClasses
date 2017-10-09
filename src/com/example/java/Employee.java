@@ -1,5 +1,9 @@
 package com.example.java;
 
+import java.text.NumberFormat;
+
+import static java.lang.Double.*;
+
 public class Employee {
     private PositionTitle positionName;
 
@@ -74,11 +78,19 @@ public class Employee {
         System.out.println("Rate of pay is: $" + payRate + " per hour");
         System.out.println("Shift: " + shift);
     }
+
         //method for accepting the hours and calculation of pay.
     void calculate(double hours) {
         double updatePayRate = 0;
         double overtimeHours;
         double overtimePay = 0;
+        String totalFormatted;
+
+        //nf to format the output of the total amount
+        NumberFormat nf = NumberFormat.getNumberInstance();
+        nf.setGroupingUsed(true);
+        nf.setMaximumFractionDigits(2);
+        nf.setMinimumFractionDigits(2);
 
             //shift determines the type of pay for each employee depending on shift
         switch (shift) {
@@ -108,6 +120,7 @@ public class Employee {
             }
         }
             //will display the amount earned this week.
-        System.out.println(name + " earned $" + totalPay + " this week.");
+        totalFormatted = nf.format(totalPay);
+        System.out.println(name + " earned $" + totalFormatted + " this week.");
     }
 }
